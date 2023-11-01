@@ -1,14 +1,15 @@
 package com.example.eitbuddy;
 
 import java.sql.*;
+import io.github.cdimascio.dotenv.Dotenv;
 
 public class Database {
+    Dotenv dotenv = Dotenv.configure().load();
     private Connection connection = null;
     protected static Database db_connection;
-    // TO DO: No suitable driver found for url //
-    private String url = "jdbc:postgresql://localhost:5432/postgres";
-    private String user = "postgres";
-    private String password = "pass";
+    private String url = dotenv.get("DATABASE_URL");
+    private String user = dotenv.get("DATABASE_USERNAME");
+    private String password = dotenv.get("DATABASE_PASSWORD");
 
     public static void main(String[] args){
         try {

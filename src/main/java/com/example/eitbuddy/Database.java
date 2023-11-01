@@ -29,9 +29,11 @@ public class Database {
     }
 
     public void insertUser(String name, String mail, String pass) throws SQLException {
-        //PreparedStatement insert = connection.prepareStatement("INSERT INTO Users(name, email, password) VALUES ('"+ name+","+mail+","+pass +"')");
-        PreparedStatement insert = connection.prepareStatement("INSERT INTO Users(name, email, password) VALUES ('admin','admin@buddy.dk','admin')");
-        insert.execute();
+        PreparedStatement insert = connection.prepareStatement("INSERT INTO Users(name, email, password) VALUES (?,?,?)");
+        insert.setString(1,name);
+        insert.setString(2,mail);
+        insert.setString(3,pass);
+        insert.executeUpdate();
     }
 
     static public Database getConnection() throws SQLException {

@@ -9,13 +9,13 @@ public class User {
     private @Id @GeneratedValue Long id;
     private String name;
     private String email;
-    private String password;
 
-    User(){}
-    User(String name, String email){
+    public User(){}
+    public User(String name, String email){
         this.name = name;
         this.email = email;
     }
+
 
     public Long getId() {
         return id;
@@ -41,11 +41,8 @@ public class User {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    @Override
+    public String toString() {
+        return "User: {"+"id="+this.id+", name='"+this.name+'\''+", email='"+this.email+'\''+'}';
     }
 }

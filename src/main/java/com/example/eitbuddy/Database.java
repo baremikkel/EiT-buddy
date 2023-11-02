@@ -7,9 +7,9 @@ public class Database {
     Dotenv dotenv = Dotenv.configure().load();
     private Connection connection = null;
     protected static Database db_connection;
-    private String url = dotenv.get("DATABASE_URL");
-    private String user = dotenv.get("DATABASE_USERNAME");
-    private String password = dotenv.get("DATABASE_PASSWORD");
+    private final String url = dotenv.get("DATABASE_URL");
+    private final String user = dotenv.get("DATABASE_USERNAME");
+    private final String password = dotenv.get("DATABASE_PASSWORD");
 
     public static void main(String[] args){
         try {
@@ -28,12 +28,25 @@ public class Database {
         }
     }
 
-    public void insertUser(String name, String mail, String pass) throws SQLException {
+    public void addNewUser(String name, String mail, String pass) throws SQLException {
         PreparedStatement insert = connection.prepareStatement("INSERT INTO Users(name, email, password) VALUES (?,?,?)");
         insert.setString(1,name);
         insert.setString(2,mail);
         insert.setString(3,pass);
         insert.executeUpdate();
+    }
+    public void addBuddy(int userId, String planttype) throws SQLException {
+        PreparedStatement insert = connection.prepareStatement("INSERT INTO buddies(userid, planttype) VALUES (?,?)");
+        insert.setInt(1, userId);
+        insert.setString(2, planttype);
+    }
+
+    public void insertData(int buddyId, double temperature, double light, double humidity) throws SQLException {
+        PreparedStatement insert = connection.prepareStatement("INSERT INTO sensorvalues(buddyid, temperature, light, soil) VALUES (?,?,?,?)");
+        insert.setInt(1,buddyId);
+        insert.setDouble(2,temperature);
+        insert.setDouble(3,light);
+        insert.setDouble(4,humidity);
     }
 
     static public Database getConnection() throws SQLException {

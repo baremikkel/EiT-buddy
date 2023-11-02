@@ -1,11 +1,9 @@
-DROP DATABASE IF EXISTS EiT;
 DROP EXTENSION IF EXISTS pgcrypto;
 CREATE EXTENSION pgcrypto;
-
 DROP TABLE IF EXISTS SensorValues;
 DROP TABLE IF EXISTS Buddies;
 DROP TABLE IF EXISTS Users;
-CREATE DATABASE EiT;
+
 CREATE TABLE Users(
                       ID SERIAL PRIMARY KEY,
                       name VARCHAR(100) NOT NULL,
@@ -22,6 +20,5 @@ CREATE TABLE SensorValues(
                              BuddyID INT REFERENCES Buddies(ID),
                              temperature DECIMAL NOT NULL,
                              light DECIMAL NOT NULL,
-                             soil_humidity DECIMAL NOT NULL,
-                             air_humidity DECIMAL NOT NULL
+                             soil DECIMAL NOT NULL
 );

@@ -19,7 +19,8 @@ public class UserController {
         return userRepository.save(user);
     }
     @GetMapping("/{id}")
-    public User getUserById(@PathVariable Long id) {
+   public User getUserById(@PathVariable Long id) {
+        System.out.println(id);
         return userRepository.findById(id).orElse(null);
     }
     @GetMapping("/hello")

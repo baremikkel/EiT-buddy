@@ -9,6 +9,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.util.Date;
@@ -32,14 +33,16 @@ public class DataServices {
         query.setParameter("buddyid", buddyid);
         return query.getResultList();
     }
-    public SensorData insertData(Long buddyId, Double temperature, Double light, Double humidity){
+    @Transactional
+    public SensorData insertData(Long buddyId, Double temperature, Double light, Double soil){
         SensorData data = new SensorData();
         Buddy buddy = buddyRepo.findById(buddyId).orElseThrow(() -> new EntityNotFoundException("Buddy not found"));
         data.setBuddy(buddy);
         data.setTemperature(temperature);
         data.setLight(light);
-        data.setHumidity(humidity);
-        data.setTime((Timestamp) new Date());
+        data.setSoil(soil);
+        data.setTime(new Date());
+        entityManager.persist(data);
         return data;
     }
 }

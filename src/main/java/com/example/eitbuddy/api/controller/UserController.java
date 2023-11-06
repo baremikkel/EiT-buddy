@@ -1,6 +1,5 @@
 package com.example.eitbuddy.api.controller;
 
-import com.example.eitbuddy.api.entity.Buddy;
 import com.example.eitbuddy.api.entity.User;
 import com.example.eitbuddy.api.service.BuddyServices;
 import com.example.eitbuddy.api.service.UserServices;
@@ -16,11 +15,9 @@ import java.util.Optional;
  */
 public class UserController {
     private final UserServices userServices;
-    private final BuddyServices buddyServices;
 
-    public UserController(UserServices userServices, BuddyServices buddyServices) {
+    public UserController(UserServices userServices) {
         this.userServices = userServices;
-        this.buddyServices = buddyServices;
     }
     @GetMapping
     public List<User> findAllUsers(){

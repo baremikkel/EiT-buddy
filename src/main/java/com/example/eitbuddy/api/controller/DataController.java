@@ -15,9 +15,9 @@ public class DataController {
         this.dataServices = dataServices;
     }
 
-    @PostMapping("/{buddyid}/temp/light/soil")
-    public SensorData insertData(@PathVariable("buddyid") Long id, @RequestParam("temp") Double temp, @RequestParam("light") Double light, @RequestParam("soil") Double soil){
-        return dataServices.insertData(id, temp, light, soil);
+    @PostMapping("/{buddyid}/addData")
+    public SensorData insertData(@PathVariable("buddyid") Long id, @RequestBody SensorData data){
+        return dataServices.insertData(id, data.getTemperature(), data.getLight(), data.getSoil());
     }
     @GetMapping("/{buddyid}/getData")
     public List<SensorData> getData(@PathVariable("buddyid") Long id){

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.persistence.Id;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 @Entity
 @Table(name = "sensorvalues")
@@ -20,10 +21,8 @@ public class SensorData {
     private Double light;
     @Column(name = "soil")
     private Double soil;
-    @Column(name = "humidity")
-    private Double humidity;
     @Column(name = "time")
-    private Timestamp time;
+    private Date time;
 
     public SensorData(Long id, Buddy buddy, Double temperature, Double light, Double soil, Double humidity, Timestamp time) {
         this.id = id;
@@ -31,7 +30,6 @@ public class SensorData {
         this.temperature = temperature;
         this.light = light;
         this.soil = soil;
-        this.humidity = humidity;
         this.time = time;
     }
 
@@ -78,19 +76,11 @@ public class SensorData {
         this.soil = soil;
     }
 
-    public Double getHumidity() {
-        return humidity;
-    }
-
-    public void setHumidity(Double humidity) {
-        this.humidity = humidity;
-    }
-
-    public Timestamp getTime() {
+    public Date getTime() {
         return time;
     }
 
-    public void setTime(Timestamp time) {
+    public void setTime(Date time) {
         this.time = time;
     }
 

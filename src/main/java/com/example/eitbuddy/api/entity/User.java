@@ -1,19 +1,28 @@
-package com.example.eitbuddy.api;
+package com.example.eitbuddy.api.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-
+import jakarta.persistence.*;
+/**
+ * This is to create the rows in the tables
+ */
 @Entity
+@Table(name = "users")
 public class User {
-    private @Id @GeneratedValue Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private  Long id;
+    @Column(name = "name")
     private String name;
+    @Column(name = "email")
     private String email;
+    @Column(name = "password")
+    private String password;
 
     public User(){}
-    public User(String name, String email){
+    public User(String name, String email, String password){
         this.name = name;
         this.email = email;
+        this.password = password;
     }
 
 
@@ -39,6 +48,12 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword(){ return password;}
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override

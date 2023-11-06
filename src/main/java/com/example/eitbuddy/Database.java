@@ -69,7 +69,7 @@ public class Database {
         }
         return set;
     }
-    public ResultSet getUser(int user) {
+    public ResultSet getUser(Long user) {
         ResultSet set = null;
         try {
             connection.createStatement().executeQuery("SELECT name, email FROM users WHERE id=" + user);

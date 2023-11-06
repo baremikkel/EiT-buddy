@@ -1,7 +1,11 @@
 package com.example.eitbuddy.api.controller;
 
+import com.example.eitbuddy.api.entity.Buddy;
 import com.example.eitbuddy.api.entity.User;
+import com.example.eitbuddy.api.service.BuddyServices;
 import com.example.eitbuddy.api.service.UserServices;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,9 +18,11 @@ import java.util.Optional;
  */
 public class UserController {
     private final UserServices userServices;
+    private final BuddyServices buddyServices;
 
-    public UserController(UserServices userServices) {
+    public UserController(UserServices userServices, BuddyServices buddyServices) {
         this.userServices = userServices;
+        this.buddyServices = buddyServices;
     }
     @GetMapping
     public List<User> findAllUsers(){
@@ -45,5 +51,14 @@ public class UserController {
     @DeleteMapping("/{id}")
     public void deleteUser(@PathVariable("id") Long id){
         userServices.removeUser(id);
+    }
+
+    @PutMapping("/{id}/addbuddy/{buddy}")
+    public Buddy addBuddy(@PathVariable("id") Long id, @PathVariable("buddy") Long buddyId){
+        Buddy addBuddy = buddyServices.assignUser(id, buddyId);
+        return addBuddy;   }
+    @PutMapping("/{id}/removebuddy/{buddy}")
+    public Buddy removeBuddy(@PathVariable("id") Long id, @PathVariable("buddy") Long buddyId){
+        return buddyServices.removeUser(buddyId, id);
     }
 }

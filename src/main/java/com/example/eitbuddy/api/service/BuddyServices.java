@@ -12,4 +12,5 @@ public interface BuddyServices {
     Buddy assignUser(Long userid, Long buddyid );
     Buddy removeUser(Long buddyid, Long userid);
     Buddy changePlantType(Long id, String plant);
+    List<Buddy> getAllUsersBuddies(Long userId);
 }

@@ -61,4 +61,8 @@ public class UserController {
     public Buddy removeBuddy(@PathVariable("id") Long id, @PathVariable("buddy") Long buddyId){
         return buddyServices.removeUser(buddyId, id);
     }
+    @GetMapping("/{id}/buddies")
+    public List<Buddy> getBuddies(@PathVariable("id") Long id){
+        return buddyServices.getAllUsersBuddies(id);
+    }
 }

@@ -11,7 +11,9 @@ public interface UserServices {
     List<User> findAllUsers();
     Optional<User> findById(Long id);
     User addUser(User user);
-    User updateUser(User user);
+    User updateUserName(Long id, String name);
+    User updateUserEmail(Long id, String email);
+    User updateUserPassword(Long id, String password);
     void removeUser(Long id);
 
 }

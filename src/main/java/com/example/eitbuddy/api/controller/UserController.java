@@ -30,9 +30,17 @@ public class UserController {
     public User addUser(@RequestBody User user){
         return userServices.addUser(user);
     }
-    @PutMapping
-    public User updateUser(@RequestBody User user){
-        return userServices.updateUser(user);
+    @PutMapping("/{id}/name")
+    public User updateUserName(@PathVariable("id") Long id, @RequestParam("name") String name){
+        return userServices.updateUserEmail(id, name);
+    }
+    @PutMapping("/{id}/email")
+    public User updateUserEmail(@PathVariable("id") Long id, @RequestParam("email") String email){
+        return userServices.updateUserPassword(id, email);
+    }
+    @PutMapping("/{id}/password")
+    public User updateUserPassword(@PathVariable("id") Long id, @RequestParam("password") String password){
+        return userServices.updateUserPassword(id, password);
     }
     @DeleteMapping("/{id}")
     public void deleteUser(@PathVariable("id") Long id){

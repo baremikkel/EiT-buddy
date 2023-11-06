@@ -13,7 +13,8 @@ import java.util.Optional;
  */
 @Service
 public class ServiceImpls implements UserServices {
-    private  final Repository repository;
+    private final Repository repository;
+
     public ServiceImpls(Repository repository) {
         this.repository = repository;
     }
@@ -29,12 +30,49 @@ public class ServiceImpls implements UserServices {
     public User addUser(User user) {
         return repository.save(user);
     }
+
     @Override
-    public User updateUser(User user) {
-        return repository.save(user);
+    public User updateUserName(Long id, String name) {
+        Optional<User> UserOptional = repository.findById(id);
+        if(UserOptional.isPresent()){
+            User user = UserOptional.get();
+            user.setName(name);
+            return repository.save(user);
+        } else
+            throw new UserNotFoundException("User with ID" + id + " not found");
+
     }
+
+    @Override
+    public User updateUserEmail(Long id, String email) {
+        Optional<User> UserOptional = repository.findById(id);
+        if(UserOptional.isPresent()){
+            User user = UserOptional.get();
+            user.setEmail(email);
+            return repository.save(user);
+        } else
+            throw new UserNotFoundException("User with ID" + id + " not found");
+
+    }
+
+    @Override
+    public User updateUserPassword(Long id, String password) {
+        Optional<User> UserOptional = repository.findById(id);
+        if(UserOptional.isPresent()){
+            User user = UserOptional.get();
+            user.setPassword(password);
+            return repository.save(user);
+        } else
+            throw new UserNotFoundException("User with ID" + id + " not found");
+    }
+
     @Override
     public void removeUser(Long id) {
         repository.deleteById(id);
+    }
+
+    private class UserNotFoundException extends RuntimeException {
+        public UserNotFoundException(String s) {
+        }
     }
 }

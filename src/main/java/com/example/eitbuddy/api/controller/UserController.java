@@ -4,8 +4,6 @@ import com.example.eitbuddy.api.entity.Buddy;
 import com.example.eitbuddy.api.entity.User;
 import com.example.eitbuddy.api.service.BuddyServices;
 import com.example.eitbuddy.api.service.UserServices;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

@@ -20,5 +20,6 @@ CREATE TABLE SensorValues(
                              BuddyID INT REFERENCES Buddies(ID),
                              temperature DECIMAL NOT NULL,
                              light DECIMAL NOT NULL,
-                             soil DECIMAL NOT NULL
+                             soil DECIMAL NOT NULL,
+                             time TIMESTAMP
 );

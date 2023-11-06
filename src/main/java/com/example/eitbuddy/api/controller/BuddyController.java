@@ -1,7 +1,6 @@
 package com.example.eitbuddy.api.controller;
 
 import com.example.eitbuddy.api.entity.Buddy;
-import com.example.eitbuddy.api.entity.User;
 import com.example.eitbuddy.api.service.BuddyServices;
 import org.springframework.web.bind.annotation.*;
 

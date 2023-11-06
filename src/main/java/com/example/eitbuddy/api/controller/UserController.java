@@ -51,16 +51,5 @@ public class UserController {
         userServices.removeUser(id);
     }
 
-    @PutMapping("/{id}/addbuddy/{buddy}")
-    public Buddy addBuddy(@PathVariable("id") Long id, @PathVariable("buddy") Long buddyId){
-        Buddy addBuddy = buddyServices.assignUser(id, buddyId);
-        return addBuddy;   }
-    @PutMapping("/{id}/removebuddy/{buddy}")
-    public Buddy removeBuddy(@PathVariable("id") Long id, @PathVariable("buddy") Long buddyId){
-        return buddyServices.removeUser(buddyId, id);
-    }
-    @GetMapping("/{id}/buddies")
-    public List<Buddy> getBuddies(@PathVariable("id") Long id){
-        return buddyServices.getAllUsersBuddies(id);
-    }
+
 }

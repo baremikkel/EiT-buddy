@@ -30,4 +30,15 @@ public class BuddyController {
     public Buddy changeType(@PathVariable("id") Long id, @RequestParam("type") String type){
         return buddyServices.changePlantType(id, type);
     }
+    @PutMapping("/{id}/addbuddy/{buddy}")
+    public Buddy addBuddy(@PathVariable("id") Long id, @PathVariable("buddy") Long buddyId){
+        return buddyServices.assignUser(id, buddyId);   }
+    @PutMapping("/{id}/removebuddy/{buddy}")
+    public Buddy removeBuddy(@PathVariable("id") Long id, @PathVariable("buddy") Long buddyId){
+        return buddyServices.removeUser(buddyId, id);
+    }
+    @GetMapping("/{id}/buddies")
+    public List<Buddy> getBuddies(@PathVariable("id") Long id){
+        return buddyServices.getAllUsersBuddies(id);
+    }
 }

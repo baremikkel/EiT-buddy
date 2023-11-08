@@ -2,12 +2,14 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import {Login} from './LoginScreen';
-import {NewScreen} from './NewScreen';
+import {Homescreen} from './Home';
+import { Signup } from './Signup';
 import { StackNavigationProp } from '@react-navigation/stack';
 
 type StackParamList = {
   Login: undefined;
-  Other: undefined;
+  Homescreen: undefined;
+  Signup: undefined;
 };
 
 export type HomeScreenNavigationProp = StackNavigationProp<StackParamList, 'Login'>;
@@ -20,7 +22,8 @@ const AppNavigator: React.FC = () => {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Login" screenOptions={{headerShown: false}}>
         <Stack.Screen name="Login" component={Login}/>
-        <Stack.Screen name="Other" component={NewScreen} />
+        <Stack.Screen name="Homescreen" component={Homescreen} />
+        <Stack.Screen name="Signup" component={Signup} />
       </Stack.Navigator>
     </NavigationContainer>
   );

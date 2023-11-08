@@ -6,16 +6,19 @@ type NavProp = {
     navigation: HomeScreenNavigationProp;
 }
 
-export const Login: React.FC<NavProp> = ({navigation}) => {
-    const login = () => {
+export const Signup: React.FC<NavProp> = ({navigation}) => {
+    const signup = () => {
         navigation.navigate('Homescreen')
     }
-    const signup = () => {
-        navigation.navigate('Signup')
-    }
-    return (
+    return(
         <View style={styles.container}>
             <ImageBackground source={require('buddy-app/textures/plantBackground.jpg')} resizeMode='cover' style={styles.image}>
+            <Text style={[styles.text, styles.textMod]}>Username</Text>
+            <TextInput
+                style={styles.input}
+                placeholder='Username'
+                placeholderTextColor="lightgray"
+            ></TextInput>
            <Text style={[styles.text, styles.textMod]}>Email</Text>
             <TextInput
                 style={styles.input}
@@ -29,17 +32,21 @@ export const Login: React.FC<NavProp> = ({navigation}) => {
                 placeholder='Password'
                 placeholderTextColor="lightgray"
             ></TextInput>
-            <Pressable style={styles.button} onPress={login}>
-                <Text style={styles.text}>Login</Text>
-            </Pressable>
-            <Pressable onPress={signup} style={styles.signup}>
-                <Text style={styles.text}>or sign up here</Text>
+            <Text style={[styles.text, styles.textMod]}>Confirm Password</Text>
+            <TextInput 
+                style={styles.input}
+                secureTextEntry={true}
+                placeholder='Password'
+                placeholderTextColor="lightgray"
+            ></TextInput>
+            <Pressable style={styles.button} onPress={signup}>
+                <Text style={styles.text}>Signup</Text>
             </Pressable>
             
             </ImageBackground>
         </View>
-    )
-}
+    );
+};
 
 const styles = StyleSheet.create({
     container: {

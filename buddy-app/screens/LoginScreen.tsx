@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+import axios from 'axios';
 import {TextInput, Text, View, StyleSheet, Image, Button, Pressable, ImageBackground} from 'react-native'
 import {HomeScreenNavigationProp} from './AppNavigator'
 
@@ -13,23 +14,51 @@ export const Login: React.FC<NavProp> = ({navigation}) => {
     const signup = () => {
         navigation.navigate('Signup')
     }
+    const [data, setData] = useState([]);
+    const [email, setEmail] = useState('');
+    const [password, setPass] = useState('');
+
+    const verify = (
+        Email: string,
+        Password: string
+         ) => {
+        axios.get('http://192.168.0.167:8080/users')
+            .then((response) =>{
+                setData(response.data)
+                response.data.forEach((user: { email: string; password: string; }) => {
+                    if(Email == user.email && Password == user.password) {
+                        login();
+                    }
+                }
+                )
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
+    
+
     return (
         <View style={styles.container}>
             <ImageBackground source={require('buddy-app/textures/plantBackground.jpg')} resizeMode='cover' style={styles.image}>
            <Text style={[styles.text, styles.textMod]}>Email</Text>
             <TextInput
+                value={email}
+                onChangeText={setEmail}
                 style={styles.input}
                 placeholder='Email address'
                 placeholderTextColor="lightgray"
             ></TextInput>
             <Text style={[styles.text, styles.textMod]}>Password</Text>
             <TextInput 
+                value={password}
+                onChangeText={setPass}
                 style={styles.input}
                 secureTextEntry={true}
                 placeholder='Password'
                 placeholderTextColor="lightgray"
             ></TextInput>
-            <Pressable style={styles.button} onPress={login}>
+            <Pressable style={styles.button} onPress={() => verify(email, password)}>
                 <Text style={styles.text}>Login</Text>
             </Pressable>
             <Pressable onPress={signup} style={styles.signup}>

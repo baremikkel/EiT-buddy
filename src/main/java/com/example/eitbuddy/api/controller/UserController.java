@@ -33,11 +33,11 @@ public class UserController {
     }
     @PutMapping("/{id}/name")
     public User updateUserName(@PathVariable("id") Long id, @RequestParam("name") String name){
-        return userServices.updateUserEmail(id, name);
+        return userServices.updateUserName(id, name);
     }
     @PutMapping("/{id}/email")
     public User updateUserEmail(@PathVariable("id") Long id, @RequestParam("email") String email){
-        return userServices.updateUserPassword(id, email);
+        return userServices.updateUserEmail(id, email);
     }
     @PutMapping("/{id}/password")
     public User updateUserPassword(@PathVariable("id") Long id, @RequestParam("password") String password){

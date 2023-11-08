@@ -15,7 +15,6 @@ public class BuddyController {
     public BuddyController(BuddyServices buddyServices) {
         this.buddyServices = buddyServices;
     }
-
     @GetMapping
     public List<Buddy> findAllBuddies(){
         return buddyServices.findAllBuddies();
@@ -30,15 +29,15 @@ public class BuddyController {
     public Buddy changeType(@PathVariable("id") Long id, @RequestParam("type") String type){
         return buddyServices.changePlantType(id, type);
     }
-    @PutMapping("/{id}/addbuddy/{buddy}")
-    public Buddy addBuddy(@PathVariable("id") Long id, @PathVariable("buddy") Long buddyId){
+    @PutMapping("/{userid}/addbuddy/{buddy}")
+    public Buddy addBuddy(@PathVariable("userid") Long id, @PathVariable("buddy") Long buddyId){
         return buddyServices.assignUser(id, buddyId);   }
-    @PutMapping("/{id}/removebuddy/{buddy}")
-    public Buddy removeBuddy(@PathVariable("id") Long id, @PathVariable("buddy") Long buddyId){
+    @PutMapping("/{userid}/removebuddy/{buddy}")
+    public Buddy removeBuddy(@PathVariable("userid") Long id, @PathVariable("buddy") Long buddyId){
         return buddyServices.removeUser(buddyId, id);
     }
-    @GetMapping("/{id}/buddies")
-    public List<Buddy> getBuddies(@PathVariable("id") Long id){
+    @GetMapping("/{userid}/getBuddies")
+    public List<Buddy> getBuddies(@PathVariable("userid") Long id){
         return buddyServices.getAllUsersBuddies(id);
     }
 }

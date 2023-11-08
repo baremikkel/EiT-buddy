@@ -14,7 +14,6 @@ public class DataController {
     public DataController(DataServices dataServices) {
         this.dataServices = dataServices;
     }
-
     @PostMapping("/{buddyid}/addData")
     public SensorData insertData(@PathVariable("buddyid") Long id, @RequestBody SensorData data){
         return dataServices.insertData(id, data.getTemperature(), data.getLight(), data.getSoil());

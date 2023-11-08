@@ -1,15 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView, StyleSheet, View } from 'react-native';
-import {Test} from './LoginScreen'
+import {Login} from './screens/LoginScreen'
+import React from 'react';
+import AppNavigator from './screens/AppNavigator';
 
-export default function App() {
-  return (
-    <SafeAreaView style={styles.container}>
-        <Test></Test>
-    </SafeAreaView>
-  );
+const App: React.FC = () => {
+  return <AppNavigator/>;
 }
-
+export default App;
 const styles = StyleSheet.create({
   container: {
     flex: 1,

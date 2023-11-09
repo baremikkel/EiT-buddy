@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 let id: any;
-let apiURL: string = 'http://10.126.81.84:8080';
+let apiURL: string = 'http://192.168.0.167:8080';
 
 // To store an array
 export const storeUser = async (key: string, array: any[]) => {
@@ -21,7 +21,7 @@ export const storeUser = async (key: string, array: any[]) => {
 };
 
 // To retrieve an array
-const getArray = async (key: string): Promise<any[] | null> => {
+const getUserinfo = async (key: string): Promise<any[] | null> => {
   try {
     const jsonString = await AsyncStorage.getItem(key);
     if (jsonString !== null) {

@@ -36,6 +36,7 @@ export const Signup: React.FC<NavProp> = ({navigation}) => {
             <ImageBackground source={require('buddy-app/textures/plantBackground.jpg')} resizeMode='cover' style={styles.image}>
             <Text style={[styles.text, styles.textMod]}>Username</Text>
             <TextInput
+                autoCapitalize='none'
                 value={name}
                 onChangeText={setName}
                 style={styles.input}
@@ -44,6 +45,7 @@ export const Signup: React.FC<NavProp> = ({navigation}) => {
             ></TextInput>
            <Text style={[styles.text, styles.textMod]}>Email</Text>
             <TextInput
+                autoCapitalize='none'       
                 value={email}
                 onChangeText={setEmail}
                 style={styles.input}
@@ -52,6 +54,7 @@ export const Signup: React.FC<NavProp> = ({navigation}) => {
             ></TextInput>
             <Text style={[styles.text, styles.textMod]}>Password</Text>
             <TextInput
+                autoCapitalize='none'
                 value={password}
                 onChangeText={setPass} 
                 style={styles.input}
@@ -61,6 +64,7 @@ export const Signup: React.FC<NavProp> = ({navigation}) => {
             ></TextInput>
             <Text style={[styles.text, styles.textMod]}>Confirm Password</Text>
             <TextInput
+                autoCapitalize='none'
                 value={cPassword}
                 onChangeText={setCPass} 
                 style={styles.input}

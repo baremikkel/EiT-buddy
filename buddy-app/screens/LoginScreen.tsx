@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import axios from 'axios';
 import {TextInput, Text, View, StyleSheet, Image, Button, Pressable, ImageBackground} from 'react-native'
 import {HomeScreenNavigationProp} from './AppNavigator'
@@ -44,6 +44,7 @@ export const Login: React.FC<NavProp> = ({navigation}) => {
             <ImageBackground source={require('buddy-app/textures/plantBackground.jpg')} resizeMode='cover' style={styles.image}>
            <Text style={[styles.text, styles.textMod]}>Email</Text>
             <TextInput
+                autoCapitalize='none'
                 value={email}
                 onChangeText={setEmail}
                 style={styles.input}
@@ -52,6 +53,7 @@ export const Login: React.FC<NavProp> = ({navigation}) => {
             ></TextInput>
             <Text style={[styles.text, styles.textMod]}>Password</Text>
             <TextInput 
+                autoCapitalize='none'
                 value={password}
                 onChangeText={setPass}
                 style={styles.input}

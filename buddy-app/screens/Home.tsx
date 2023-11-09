@@ -1,10 +1,14 @@
 import React from 'react';
 import {TextInput, Text, View, StyleSheet, Image, Button, Pressable, ImageBackground} from 'react-native'
+import { Navbar } from './AppNavigator';
+import {HomeScreenNavigationProp} from './AppNavigator'
 
-export const Homescreen: React.FC = () => {
+type NavProp = {
+    nav: HomeScreenNavigationProp;
+}
+
+export const Homescreen: React.FC<NavProp> = ({nav}) => {
     return(
-        <View>
-            <Text>New Screen</Text>
-        </View>
+        <Navbar nav={nav}/>
     );
 };

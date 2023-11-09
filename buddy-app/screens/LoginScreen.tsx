@@ -22,7 +22,7 @@ export const Login: React.FC<NavProp> = ({navigation}) => {
         Email: string,
         Password: string
          ) => {
-        axios.get('http://192.168.0.167:8080/users')
+        axios.get('http://10.126.21.122:8080/users')
             .then((response) =>{
                 setData(response.data)
                 response.data.forEach((user: { email: string; password: string; }) => {

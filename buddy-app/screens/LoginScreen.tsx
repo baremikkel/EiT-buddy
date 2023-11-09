@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import {TextInput, Text, View, StyleSheet, Image, Button, Pressable, ImageBackground} from 'react-native'
 import {HomeScreenNavigationProp} from './AppNavigator'
+import {storeUser, getId, getUrl} from './storage/DataStorage'
 
 type NavProp = {
     navigation: HomeScreenNavigationProp;
@@ -22,15 +23,15 @@ export const Login: React.FC<NavProp> = ({navigation}) => {
         Email: string,
         Password: string
          ) => {
-        axios.get('http://192.168.0.167:8080/users')
+        axios.get(getUrl()+'/users')
             .then((response) =>{
                 setData(response.data)
-                response.data.forEach((user: { email: string; password: string; }) => {
+                response.data.forEach((user: {id: any; name: string; email: string; password: string; }) => {
                     if(Email == user.email && Password == user.password) {
+                        storeUser(user.id, [user.name,user.email, user.password]);
                         login();
                     }
-                }
-                )
+                })
             })
             .catch((error) => {
                 console.log(error)

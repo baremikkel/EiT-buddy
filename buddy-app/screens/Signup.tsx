@@ -1,45 +1,74 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {TextInput, Text, View, StyleSheet, Image, Button, Pressable, ImageBackground} from 'react-native'
 import {HomeScreenNavigationProp} from './AppNavigator'
+import axios, { AxiosResponse } from 'axios'
+import { getUrl } from './storage/DataStorage';
 
 type NavProp = {
     navigation: HomeScreenNavigationProp;
 }
 
 export const Signup: React.FC<NavProp> = ({navigation}) => {
-    const signup = () => {
-        navigation.navigate('Homescreen')
+    const signup = (
+        uName: string,
+        Email: string,
+        pass: string,
+        cpass: string
+        ) => {
+            let data;
+            if(pass == cpass) {
+                data = {
+                name: uName,
+                email: Email,
+                password: pass
+            }
+        }
+        axios.post(getUrl()+'/users', data)
+        navigation.navigate('Login')
     }
+    const [email, setEmail] = useState('');
+    const [name, setName] = useState('');
+    const [password, setPass] = useState('');
+    const [cPassword, setCPass] = useState('');
+
     return(
         <View style={styles.container}>
             <ImageBackground source={require('buddy-app/textures/plantBackground.jpg')} resizeMode='cover' style={styles.image}>
             <Text style={[styles.text, styles.textMod]}>Username</Text>
             <TextInput
+                value={name}
+                onChangeText={setName}
                 style={styles.input}
                 placeholder='Username'
                 placeholderTextColor="lightgray"
             ></TextInput>
            <Text style={[styles.text, styles.textMod]}>Email</Text>
             <TextInput
+                value={email}
+                onChangeText={setEmail}
                 style={styles.input}
                 placeholder='Email address'
                 placeholderTextColor="lightgray"
             ></TextInput>
             <Text style={[styles.text, styles.textMod]}>Password</Text>
-            <TextInput 
+            <TextInput
+                value={password}
+                onChangeText={setPass} 
                 style={styles.input}
                 secureTextEntry={true}
                 placeholder='Password'
                 placeholderTextColor="lightgray"
             ></TextInput>
             <Text style={[styles.text, styles.textMod]}>Confirm Password</Text>
-            <TextInput 
+            <TextInput
+                value={cPassword}
+                onChangeText={setCPass} 
                 style={styles.input}
                 secureTextEntry={true}
                 placeholder='Password'
                 placeholderTextColor="lightgray"
             ></TextInput>
-            <Pressable style={styles.button} onPress={signup}>
+            <Pressable style={styles.button} onPress={() => signup(name, email, password, cPassword)}>
                 <Text style={styles.text}>Signup</Text>
             </Pressable>
             

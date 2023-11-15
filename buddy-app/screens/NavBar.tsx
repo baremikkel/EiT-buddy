@@ -1,30 +1,25 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import {TextInput, Text, View, StyleSheet, Image, Button, Pressable, ImageBackground} from 'react-native';
 import EntypoIcon from 'react-native-vector-icons/Entypo';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
-import { HomeScreenNavigationProp } from './AppNavigator';
 
-type NavProp = {
-    nav: HomeScreenNavigationProp;
-  }
-
-export const Navbar: React.FC<NavProp> = ({nav}) => {
+export const Navbar = () => {
+  const nav =  useNavigation();
     const home = () => {
-      nav.navigate('Signup')
+      nav.navigate('Homescreen')
     }
 
-    /*
     const profile = () => {
       nav.navigate('Profile')
   }
-*/
-  
+
   return (
     <View style={styles.container}>
       <Pressable style={styles.button} onPress={home}>
         <Text style={styles.buttonInfo}><EntypoIcon name="home" size={25}/></Text>
       </Pressable>
-      <Pressable style={styles.button}>
+      <Pressable style={styles.button} onPress={profile}>
         <Text style={styles.buttonInfo}><FontAwesomeIcon name="user" size={25}/></Text>
       </Pressable>
       <Pressable style={styles.button}>

@@ -1,14 +1,11 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 import {TextInput, Text, View, StyleSheet, Image, Button, Pressable, ImageBackground} from 'react-native'
-import {HomeScreenNavigationProp} from './AppNavigator'
 import {storeUser, getId, getUrl} from './storage/DataStorage'
+import { useNavigation } from '@react-navigation/native';
 
-type NavProp = {
-    navigation: HomeScreenNavigationProp;
-}
-
-export const Login: React.FC<NavProp> = ({navigation}) => {
+export const Login = () => {
+    const navigation =useNavigation();
     const login = () => {
         navigation.navigate('Homescreen')
     }

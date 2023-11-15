@@ -21,10 +21,12 @@ export const Signup: React.FC<NavProp> = ({navigation}) => {
                 name: uName,
                 email: Email,
                 password: pass
+                
             }
+           axios.post(getUrl()+'/users', data)
+            navigation.navigate('Login') 
         }
-        axios.post(getUrl()+'/users', data)
-        navigation.navigate('Login')
+        
     }
     const [email, setEmail] = useState('');
     const [name, setName] = useState('');

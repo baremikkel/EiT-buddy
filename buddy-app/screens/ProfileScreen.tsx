@@ -1,10 +1,20 @@
 import React from 'react';
-import {TextInput, Text, View, StyleSheet, Image, Button, Pressable, ImageBackground} from 'react-native'
+import {SafeAreaView,TextInput, Text, View, StyleSheet, Image, Button, Pressable, ImageBackground} from 'react-native'
+import { Navbar } from './NavBar';
 
-export const Profile: React.FC = () => {
+export const Profile = () => {
     return(
-        <View>
+           <View style={styles.container}>
             <Text>New Screen</Text>
-        </View>
+            <Navbar/>
+        </View>        
     );
-};
+}
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        marginTop: 32,
+        borderWidth: 1
+      }
+})

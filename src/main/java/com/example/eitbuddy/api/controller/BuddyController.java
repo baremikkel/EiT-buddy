@@ -24,7 +24,9 @@ public class BuddyController {
         return buddyServices.findById(id);
     }
     @PostMapping
-    public Buddy addBuddy(@RequestBody Buddy buddy){return buddyServices.addBuddy(buddy);}
+    public Buddy addBuddy(@RequestBody Buddy buddy){
+        return buddyServices.addBuddy(buddy);
+    }
     @PutMapping("/{id}/type")
     public Buddy changeType(@PathVariable("id") Long id, @RequestParam("type") String type){
         return buddyServices.changePlantType(id, type);

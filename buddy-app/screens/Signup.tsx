@@ -9,6 +9,9 @@ type NavProp = {
 }
 
 export const Signup: React.FC<NavProp> = ({navigation}) => {
+
+    const [areIdentical, setAreIdentical] = useState<boolean>(true);
+
     const signup = (
         uName: string,
         Email: string,
@@ -20,14 +23,17 @@ export const Signup: React.FC<NavProp> = ({navigation}) => {
                 data = {
                 name: uName,
                 email: Email,
-                password: pass
-                
+                password: pass,
             }
            axios.post(getUrl()+'/users', data)
-            navigation.navigate('Login') 
+           navigation.navigate('Login')
         }
-        
+
+        if(pass != cpass) {
+            setAreIdentical(false);
+        };
     }
+    
     const [email, setEmail] = useState('');
     const [name, setName] = useState('');
     const [password, setPass] = useState('');
@@ -74,6 +80,11 @@ export const Signup: React.FC<NavProp> = ({navigation}) => {
                 placeholder='Password'
                 placeholderTextColor="lightgray"
             ></TextInput>
+
+            {!areIdentical && (
+                <Text style={styles.warning}>Passwords don't match!</Text>
+            )}
+
             <Pressable style={styles.button} onPress={() => signup(name, email, password, cPassword)}>
                 <Text style={styles.text}>Signup</Text>
             </Pressable>
@@ -122,5 +133,11 @@ const styles = StyleSheet.create({
         paddingRight: 50,
         flexDirection: 'row',
         justifyContent: 'flex-end',
-    }
+    },
+    warning: {
+            color: 'red',
+            marginVertical: 5,
+            fontWeight: 'bold',
+            alignSelf: 'center',
+    },
 });

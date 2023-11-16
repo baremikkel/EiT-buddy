@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useEffect, useState } from 'react';
 
 let id: any;
-let apiURL: string = 'http://192.168.15.202:8080';
 
 // To store an array
 export const storeUser = async (key: string, array: any[]) => {
@@ -39,5 +39,5 @@ export const getId = () => {
     return id;
 }
 export const getUrl = () => {
-    return apiURL;
+    return 'http://10.126.21.120:8080';
 }

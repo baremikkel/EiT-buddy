@@ -3,21 +3,19 @@ import {TextInput, Text, View, StyleSheet, Image, Button, Pressable, ImageBackgr
 import { Navbar } from './NavBar';
 import {HomeScreenNavigationProp} from './AppNavigator'
 
-type NavProp = {
-    nav: HomeScreenNavigationProp;
-}
-
 const style = StyleSheet.create({
     container: {
         flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
     }
-})
+});
 
-export const Homescreen: React.FC<NavProp> = ({nav}) => {
+export const Homescreen = () => {
     return(
         <View style={style.container}>
-            <Text>BEANS</Text>
-            <Navbar nav={nav}/>
+            <Text>HOME Screen</Text>
+            <Navbar/>
         </View>
     );
 };

@@ -5,6 +5,11 @@ import {storeUser, getId, getUrl} from './storage/DataStorage'
 import { useNavigation } from '@react-navigation/native';
 
 export const Login = () => {
+
+    const [isValidPassword, setIsValidPassword] = useState<boolean>(true);
+    const [isRegistered, setIsRegistered] = useState<boolean>(true);
+
+
     const navigation =useNavigation();
     const login = () => {
         navigation.navigate('Homescreen')
@@ -26,7 +31,14 @@ export const Login = () => {
                 response.data.forEach((user: {id: any; name: string; email: string; password: string; }) => {
                     if(Email == user.email && Password == user.password) {
                         storeUser(user.id, [user.name,user.email, user.password]);
+                        setIsRegistered(true);
+                        setIsValidPassword(true);
                         login();
+                    } else if(Email == user.email && Password != user.password) {
+                        setIsRegistered(true);
+                        setIsValidPassword(false);
+                    } else if(Email != user.email) {
+                        setIsRegistered(false);
                     }
                 })
             })
@@ -48,6 +60,11 @@ export const Login = () => {
                 placeholder='Email address'
                 placeholderTextColor="lightgray"
             ></TextInput>
+
+            {!isRegistered && (
+                                <Text style={styles.warning}>No account with this email</Text>
+                              )}
+
             <Text style={[styles.text, styles.textMod]}>Password</Text>
             <TextInput 
                 autoCapitalize='none'
@@ -58,6 +75,11 @@ export const Login = () => {
                 placeholder='Password'
                 placeholderTextColor="lightgray"
             ></TextInput>
+
+            {!isValidPassword && (
+                    <Text style={styles.warning}>Invalid password!</Text>
+                  )}
+
             <Pressable style={styles.button} onPress={() => verify(email, password)}>
                 <Text style={styles.text}>Login</Text>
             </Pressable>
@@ -106,8 +128,15 @@ const styles = StyleSheet.create({
         color: 'white'
     },
     signup: {
-        paddingRight: 50,
+        width: '30%',
+        marginHorizontal: '65%',
         flexDirection: 'row',
-        justifyContent: 'flex-end',
-    }
+        justifyContent: 'center',
+    },
+    warning: {
+        color: 'red',
+        marginVertical: 5,
+        fontWeight: 'bold',
+        alignSelf: 'center',
+    },
 });

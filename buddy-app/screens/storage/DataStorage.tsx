@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useEffect, useState } from 'react';
+
 
 let id: any;
 
@@ -39,5 +39,5 @@ export const getId = () => {
     return id;
 }
 export const getUrl = () => {
-    return 'http://10.126.21.120:8080';
+    return 'http://192.168.69.2:8080';
 }

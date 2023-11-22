@@ -16,28 +16,52 @@ const styles = StyleSheet.create({
         paddingTop: 100,
     },
     name: {
-        fontSize: 20,
+        fontSize: 28,
+        paddingTop: 20,
+        paddingBottom: 50,
+    },
+    info: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
         paddingTop: 20,
     },
+    details: {
+        fontSize: 20,
+        paddingtop: 10,
+    },
+    edit: {
+        marginLeft: 20,
+    },
+
 });
 
 export const Profile = () => {
 
 
+    const [userName, setName] = useState("");
     const [userMail, setEmail] = useState("");
+    const [userPassword, setPassword] = useState("");
 
 
     axios.get(getUrl() + '/users/' + getId())
         .then((response) =>{
-            setEmail(response.data.name)
+            setName(response.data.name)
+            setEmail(response.data.email)
+            setPassword(response.data.password)
     });
 
 
     return(
          <View style={styles.container}>
             <FontAwesomeIcon name="user" size={75} color="green" style={styles.profile}/>
-            <Text style={styles.name}>Welcome {userMail}</Text>
+            <Text style={styles.name}>Welcome {userName}</Text>
+            <View style={styles.info}>
+                <Text style={styles.details}>Email: {userMail}</Text>
+                <FontAwesomeIcon name="pencil" size={20} color="green" style={styles.edit}/>
+            </View>
             <Navbar/>
-        </View>        
+        </View>
     );
 };

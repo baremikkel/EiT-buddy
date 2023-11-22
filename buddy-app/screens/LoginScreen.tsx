@@ -16,8 +16,8 @@ export const Login = () => {
         navigation.navigate('Signup')
     }
     const [data, setData] = useState([]);
-    const [email, setEmail] = useState('');
     const [password, setPass] = useState('');
+    const [email, setEmail] = useState('');
 
     const verify = (
         Email: string,

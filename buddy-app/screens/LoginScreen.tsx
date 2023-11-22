@@ -5,10 +5,8 @@ import {storeUser, getId, getUrl} from './storage/DataStorage'
 import { useNavigation } from '@react-navigation/native';
 
 export const Login = () => {
-
     const [isValidPassword, setIsValidPassword] = useState<boolean>(true);
     const [isRegistered, setIsRegistered] = useState<boolean>(true);
-
 
     const navigation =useNavigation();
     const login = () => {
@@ -34,10 +32,12 @@ export const Login = () => {
                         setIsRegistered(true);
                         setIsValidPassword(true);
                         login();
-                    } else if(Email == user.email && Password != user.password) {
+                    } 
+                    if(Email == user.email && Password != user.password) {
                         setIsRegistered(true);
                         setIsValidPassword(false);
-                    } else if(Email != user.email) {
+                    } 
+                    if(Email != user.email) {
                         setIsRegistered(false);
                     }
                 })

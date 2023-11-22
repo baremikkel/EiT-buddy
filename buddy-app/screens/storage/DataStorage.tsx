@@ -2,6 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 let id: any;
+let buddyid: any;
 
 // To store an array
 export const storeUser = async (key: string, array: any[]) => {
@@ -38,6 +39,12 @@ const getUserinfo = async (key: string): Promise<any[] | null> => {
 export const getId = () => {
     return id;
 }
+export const getBuddyId = () => {
+    return buddyid;
+}
+export const setBuddyId = (newbuddyid: any) => {
+  buddyid = newbuddyid;
+}
 export const getUrl = () => {
-    return 'http://192.168.69.2:8080';
+    return 'http://10.126.81.84:8080';
 }

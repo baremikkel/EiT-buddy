@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import {TextInput, Text, View, StyleSheet, Image, Button, Pressable, ImageBackground} from 'react-native'
 import { Navbar } from './NavBar';
+import { useNavigation } from '@react-navigation/native';
 import {HomeScreenNavigationProp} from './AppNavigator'
 import axios from 'axios';
-import { getUrl, getId } from './storage/DataStorage';
+import { getUrl, getId, setBuddyId } from './storage/DataStorage';
 
 const style = StyleSheet.create({
     container: {
@@ -18,12 +19,20 @@ const style = StyleSheet.create({
 });
 
 export const Homescreen = () => {
+    const nav = useNavigation();
+
     const [fetch, setFetch] = useState<boolean>(true);
     const [plant, setPlantType] = useState([])
+    const [plantid, setPlantId] = useState([]);
+    const buddy = (index) =>{
+        nav.navigate('BuddyScreen')
+        setBuddyId(plantid[index])
+    }
     const fetchData = () => {
         axios.get(getUrl()+'/buddies/'+getId()+'/getBuddies')
         .then((reponse) =>{
                setPlantType(reponse.data.map((buddy: { plant_type: string; }) => buddy.plant_type)); 
+                setPlantId(reponse.data.map((buddy: {id: any}) => buddy.id))
             })
     }
     if(fetch == true) {
@@ -34,7 +43,9 @@ export const Homescreen = () => {
     return(
         <View style={style.container}>
             {plant.map((plant, index) => (
-        <Text key={index} style={style.title}>Type: {plant}</Text>
+                <Pressable onPress={() => buddy(index)}>
+                     <Text key={index} style={style.title}>Type: {plant}</Text>
+                </Pressable>
             ))}
             <Navbar/>
         </View>

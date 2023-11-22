@@ -39,7 +39,6 @@ export const Homescreen = () => {
         fetchData();
         setFetch(false);
     }
-    console.log(fetch)
     return(
         <View style={style.container}>
             {plant.map((plant, index) => (

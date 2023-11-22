@@ -39,5 +39,5 @@ export const getId = () => {
     return id;
 }
 export const getUrl = () => {
-    return 'http://192.168.69.2:8080';
+    return 'http://10.126.12.240:8080';
 }

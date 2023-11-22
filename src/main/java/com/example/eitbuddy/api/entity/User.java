@@ -24,7 +24,7 @@ public class User {
     @Column(name = "password")
     private String password;
     @Column (name = "salt")
-    private byte[] salt = new byte[8];
+    private byte[] salt;
     public User(){}
     public User(String name, String email, String password){
         this.salt = randomSalt(); 

@@ -35,3 +35,4 @@ build/
 src/main/resources/application.properties
 *.properties
 node_modules
+src/main/resources/application.properties

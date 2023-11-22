@@ -56,6 +56,15 @@ public class UserServices {
         } else
             throw new EntityNotFoundException("User with ID" + id + " not found");
     }
+    public User updateUserSalt(Long id, byte[] salt) {
+        Optional<User> UserOptional = userRepo.findById(id);
+        if(UserOptional.isPresent()){
+            User user = UserOptional.get();
+            user.setSalt();
+            return userRepo.save(user);
+        } else
+            throw new EntityNotFoundException("User with ID" + id + " not found");
+    }
     public void removeUser(Long id) {
         userRepo.deleteById(id);
     }

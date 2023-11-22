@@ -91,13 +91,21 @@ public class User {
         this.email = email;
     }
 
+    public void setSalt() {
+        this.salt = randomSalt();
+    }
+    
+    public byte[] getsalt() {
+        return salt;
+    }
+
     public String getPassword(){
         return password;
         // can not be used anymore
     }
 
     public void setPassword(String password) {
-        this.salt = randomSalt(); // renewing salt is good practice
+        setSalt();// renewing salt is good practice
         this.password = hashedString(password, this.salt);
     }
 

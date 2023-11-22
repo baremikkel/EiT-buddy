@@ -30,7 +30,7 @@ public class User {
         this.salt = randomSalt(); 
         this.name = name;
         this.email = email;
-        this.password = hashedString(password, salt);
+        this.password = hashedString(password, this.salt);
     }
 
     private byte[] randomSalt() {

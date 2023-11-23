@@ -2,20 +2,33 @@ import React, { useState } from 'react';
 import {TextInput, Text, View, StyleSheet, Image, Button, Pressable, ImageBackground} from 'react-native'
 import { Navbar } from './NavBar';
 import { useNavigation } from '@react-navigation/native';
-import {HomeScreenNavigationProp} from './AppNavigator'
 import axios from 'axios';
 import { getUrl, getId, setBuddyId } from './storage/DataStorage';
 
 const style = StyleSheet.create({
     container: {
+        marginTop: 30,
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
+    },
+        buddy_box: {
+        margin: 15,
+        width: 150,
+        height: 150,
+        backgroundColor: "#005691",
+        borderRadius: 10,
+    },
+    
+    bbcontainer: {
+        flexDirection: 'row',
     },
     title: {
-        paddingTop: 100,
+        paddingVertical: 60,
         fontSize: 20,
+        textAlign: 'center',
+        color: 'white',
     },
+
+
 });
 
 export const Homescreen = () => {
@@ -40,13 +53,23 @@ export const Homescreen = () => {
         setFetch(false);
     }
     return(
-        <View style={style.container}>
-            {plant.map((plant, index) => (
-                <Pressable onPress={() => buddy(index)}>
-                     <Text key={index} style={style.title}>Type: {plant}</Text>
-                </Pressable>
-            ))}
-            <Navbar/>
-        </View>
+            <View style={style.container}>
+                <View style={style.bbcontainer}>
+                    {plant.map((plant, index) => (
+                    <View style={style.buddy_box}>
+                        <ImageBackground source={require('buddy-app/textures/Rectangle8.png')}>
+                            <Pressable onPress={() => buddy(index)}>
+                                <Text key={index} style={style.title}>Type: {plant}</Text>
+                            </Pressable>
+                        </ImageBackground>
+                    </View>
+                    ))}
+
+                </View>
+                <Navbar/>
+            </View>
+            
+        
     );
 };
+

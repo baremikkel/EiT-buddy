@@ -40,10 +40,11 @@ const styles = StyleSheet.create({
       flex: 1,
       padding: 10,
       borderWidth: 1,
-      backgroundColor: 'green',
+      backgroundColor: '#0075FF',
       width: 33
     },
     buttonInfo: {
+      color: 'white',
       textAlign: 'center'
     }
   }

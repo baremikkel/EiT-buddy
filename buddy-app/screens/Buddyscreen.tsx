@@ -136,8 +136,8 @@ export const Buddyscreen = () => {
     yAxisSuffix="k"
     yAxisInterval={1} // optional, defaults to 1
     chartConfig={{
-      backgroundGradientFrom: "rgb(79,145,67)",
-      backgroundGradientTo: "rgb(79,150,67)",
+      backgroundGradientFrom: "#005ECF",
+      backgroundGradientTo: "005691",
       decimalPlaces: 2, // optional, defaults to 2dp
       color: (opacity = 1) => `rgba(255,255,255, ${opacity})`,
       labelColor: (opacity = 1) => `rgba(255,255,255, ${opacity})`,

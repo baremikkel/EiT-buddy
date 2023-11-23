@@ -68,8 +68,8 @@ export const Buddyscreen = () => {
     yAxisSuffix="k"
     yAxisInterval={1} // optional, defaults to 1
     chartConfig={{
-      backgroundGradientFrom: "rgb(79,145,67)",
-      backgroundGradientTo: "rgb(79,150,67)",
+      backgroundGradientFrom: "#005ECF",
+      backgroundGradientTo: "#005691",
       decimalPlaces: 2, // optional, defaults to 2dp
       color: (opacity = 1) => `rgba(255,255,255, ${opacity})`,
       labelColor: (opacity = 1) => `rgba(255,255,255, ${opacity})`,
@@ -102,8 +102,8 @@ export const Buddyscreen = () => {
     yAxisSuffix="k"
     yAxisInterval={1} // optional, defaults to 1
     chartConfig={{
-      backgroundGradientFrom: "rgb(79,145,67)",
-      backgroundGradientTo: "rgb(79,150,67)",
+      backgroundGradientFrom: "#005ECF",
+      backgroundGradientTo: "#005691",
       decimalPlaces: 2, // optional, defaults to 2dp
       color: (opacity = 1) => `rgba(255,255,255, ${opacity})`,
       labelColor: (opacity = 1) => `rgba(255,255,255, ${opacity})`,
@@ -137,7 +137,7 @@ export const Buddyscreen = () => {
     yAxisInterval={1} // optional, defaults to 1
     chartConfig={{
       backgroundGradientFrom: "#005ECF",
-      backgroundGradientTo: "005691",
+      backgroundGradientTo: "#005691",
       decimalPlaces: 2, // optional, defaults to 2dp
       color: (opacity = 1) => `rgba(255,255,255, ${opacity})`,
       labelColor: (opacity = 1) => `rgba(255,255,255, ${opacity})`,
@@ -196,14 +196,16 @@ const style = StyleSheet.create({
         alignItems: 'center'
     },
     text_r: {
+      color: 'white',
       textAlign: 'right',
       fontSize: 20,
     },
     text_l: {
+      color: 'white',
       fontSize: 20,
     },
     text_container: {
-      backgroundColor: 'rgba(79,140,67,0.5)',
+      backgroundColor: 'rgba(0,79,142,0.6)',
       width: Dimensions.get("window").width-15,
       padding: 10,
       borderRadius: 15,
@@ -225,17 +227,17 @@ const style = StyleSheet.create({
       textAlign: 'center',
       color: 'white',
       fontSize: 40,
-      backgroundColor: 'rgb(79,145,67)',
+      backgroundColor: 'rgb(0,79,142)',
       borderTopRightRadius: 16,
       borderTopLeftRadius: 16,
       borderWidth: 1,
       borderColor: 'black',
     },
     button: {
-      borderRadius: 16,
+      borderRadius: 5,
       borderWidth: 1,
       borderColor: 'black',
-      backgroundColor: 'rgb(72,119,61)',
+      backgroundColor: 'rgb(1,108,183)',
       width: '33%'
     },
     button_group: {
@@ -245,5 +247,6 @@ const style = StyleSheet.create({
     },
     text_center: {
       textAlign: 'center',
+      color: 'white',
     }
 })

@@ -24,7 +24,7 @@ public class User {
     @Column(name = "password")
     private String password;
     @Column (name = "salt")
-    private byte[] salt;
+    private String salt;
     public User(){}
     public User(String name, String email, String password){
         this.salt = randomSalt(); 
@@ -33,32 +33,34 @@ public class User {
         this.password = hashedString(password, this.salt);
     }
 
-    private byte[] randomSalt() {
-        byte[] salt = new byte[8];
+    private String randomSalt() {
+        // the salt is generated using bytes for full 256 coverage
+        byte[] salts = new byte[16]; // 16 bytes makes for 3.4E38
         SecureRandom random = new SecureRandom();
-        random.nextBytes(salt);
-        return salt;
+        random.nextBytes(salts);
+        StringBuilder hexBuilder = new StringBuilder();
+        for (byte b : salts) {
+            hexBuilder.append(String.format("%02X", b));
+            // the %02X means 2 digit hex where 0 serves as padding
+        }
+        return hexBuilder.toString();
+        // the salt is in hexadecimal String format for consistency
     }
 
-    private String hashedString(String input, byte[] salt) {
-        String saltedInput = new String(salt, StandardCharsets.UTF_8) + input;
+    private String hashedString(String input, String salt) {
+        String saltedInput = input + salt;
         try {
-            MessageDigest digestor = MessageDigest.getInstance("SHA-256");
-            byte[] hash = digestor.digest(saltedInput.getBytes(StandardCharsets.UTF_8));
+            MessageDigest SHA256 = MessageDigest.getInstance("SHA-256");
+            byte[] hashes = SHA256.digest(saltedInput.getBytes(StandardCharsets.UTF_8));
 
-            // Convert the byte array to a hexadecimal string
-            StringBuilder hexString = new StringBuilder();
-            for (byte b : hash) {
-                String hex = Integer.toHexString(0xff & b);
-                if (hex.length() == 1) {
-                    hexString.append('0');
-                }
-                hexString.append(hex);
+            StringBuilder hexBuilder = new StringBuilder();
+            for (byte b : hashes) {
+                hexBuilder.append(String.format("%02X", b));
             }
-            return hexString.toString();
+
+            return hexBuilder.toString();
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
-            // Handle exception
             return null;
         }
     }
@@ -95,7 +97,7 @@ public class User {
         this.salt = randomSalt();
     }
     
-    public byte[] getsalt() {
+    public String getSalt() {
         return salt;
     }
 

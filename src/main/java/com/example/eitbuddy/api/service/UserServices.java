@@ -56,7 +56,7 @@ public class UserServices {
         } else
             throw new EntityNotFoundException("User with ID" + id + " not found");
     }
-    public User updateUserSalt(Long id, byte[] salt) {
+    public User updateUserSalt(Long id, String salt) {
         Optional<User> UserOptional = userRepo.findById(id);
         if(UserOptional.isPresent()){
             User user = UserOptional.get();

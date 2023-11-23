@@ -44,7 +44,7 @@ public class UserController {
         return userServices.updateUserPassword(id, password);
     }
     @PutMapping("/{id}/salt")
-    public User updateUserSalt(@PathVariable("id") Long id, @RequestParam("salt") byte[] salt){
+    public User updateUserSalt(@PathVariable("id") Long id, @RequestParam("salt") String salt){
         return userServices.updateUserSalt(id, salt);
     }
     @DeleteMapping("/{id}")

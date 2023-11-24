@@ -38,7 +38,7 @@ export const Buddyscreen = () => {
     axios.get(getUrl() + '/data/' + getBuddyId() + '/getData')
       .then((response) => {
         getNewestData(response)
-        setxAxis(response.data.map((data: { time: string }) => data.time))
+        setxAxis(response.data.map((data: { time: string }) => data.time.substring(11, 19)))
         setyAxisTemp(response.data.map((data: { temperature: string }) => data.temperature))
         setyAxisSoil(response.data.map((data: { soil: string }) => data.soil))
         setyAxisLight(response.data.map((data: { light: string }) => data.light))
@@ -57,7 +57,7 @@ export const Buddyscreen = () => {
     <View style={style.container}>
       <View style={style.chart_container}>
         <Text style={style.text_c}>{title}</Text>
-        {activeChart === 'temp' && (
+        {activeChart === 'temp' && ( //Temperature
           <LineChart
             data={{
               labels: xAxis,
@@ -78,10 +78,9 @@ export const Buddyscreen = () => {
               labelColor: (opacity = 1) => `rgba(255,255,255, ${opacity})`,
             }}
             bezier
-            style={style.chart}
           />
         )}
-        {activeChart === 'soil' && (
+        {activeChart === 'soil' && ( //Soil Moisture
           <LineChart
             data={{
               labels: xAxis,
@@ -104,10 +103,9 @@ export const Buddyscreen = () => {
               labelColor: (opacity = 1) => `rgba(255,255,255, ${opacity})`,
             }}
             bezier
-            style={style.chart}
           />
         )}
-        {activeChart === 'light' && (
+        {activeChart === 'light' && ( //Sun light
           <LineChart
             data={{
               labels: xAxis,
@@ -118,7 +116,6 @@ export const Buddyscreen = () => {
             width={Dimensions.get("window").width - 15} // from react-native
             height={230}
             fromZero={true}
-            yAxisLabel="$"
             yAxisSuffix="k"
             yAxisInterval={1} // optional, defaults to 1
             chartConfig={{
@@ -129,7 +126,6 @@ export const Buddyscreen = () => {
               labelColor: (opacity = 1) => `rgba(255,255,255, ${opacity})`,
             }}
             bezier
-            style={style.chart}
           />
         )}
 
@@ -191,6 +187,7 @@ const style = StyleSheet.create({
     fontSize: 20,
   },
   text_container: {
+    margin: 15,
     backgroundColor: 'rgba(0,79,142,0.6)',
     width: Dimensions.get("window").width - 15,
     padding: 10,
@@ -203,11 +200,6 @@ const style = StyleSheet.create({
   },
   chart_container: {
     marginTop: 35,
-
-  },
-  chart: {
-    borderBottomRightRadius: 16,
-    borderBottomLeftRadius: 16,
   },
   text_c: {
     textAlign: 'center',
@@ -218,18 +210,16 @@ const style = StyleSheet.create({
     borderTopLeftRadius: 16,
     borderWidth: 1,
     borderColor: 'black',
+    width: Dimensions.get("window").width - 15,
   },
   button: {
-    borderRadius: 5,
-    borderWidth: 1,
-    borderColor: 'black',
     backgroundColor: 'rgb(1,108,183)',
     width: '33%'
   },
   button_group: {
     flexDirection: 'row',
+    backgroundColor: 'rgb(1,108,183)',
     width: Dimensions.get("window").width - 15,
-    marginBottom: 15,
   },
   text_center: {
     textAlign: 'center',

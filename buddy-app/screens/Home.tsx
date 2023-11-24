@@ -11,7 +11,7 @@ const style = StyleSheet.create({
         flex: 1,
     },
     buddy_box: {
-        margin: 15,
+        margin: '6%',
         width: 150,
         height: 150,
         backgroundColor: "#005691",
@@ -27,7 +27,12 @@ const style = StyleSheet.create({
         textAlign: 'center',
         color: 'white',
     },
-
+    add_title: {
+        paddingVertical: 40,
+        fontSize: 50,
+        textAlign: 'center',
+        color: 'white',
+    }
 
 });
 
@@ -37,7 +42,7 @@ export const Homescreen = () => {
     const [fetch, setFetch] = useState<boolean>(true);
     const [plant, setPlantType] = useState([])
     const [plantid, setPlantId] = useState([]);
-    const buddy = (index) => {
+    const buddy = (index: number) => {
         nav.navigate('BuddyScreen')
         setBuddyId(plantid[index])
     }
@@ -59,13 +64,20 @@ export const Homescreen = () => {
                     <View style={style.buddy_box}>
                         <ImageBackground source={require('buddy-app/textures/Rectangle8.png')}>
                             <Pressable onPress={() => buddy(index)}>
-                                <Text key={index} style={style.title}>Type: {plant}</Text>
+                                <Text key={index} style={style.title}>{plant}</Text>
                             </Pressable>
                         </ImageBackground>
                     </View>
                 ))}
-
             </View>
+            <View style={style.buddy_box}>
+                <ImageBackground source={require('buddy-app/textures/Rectangle8.png')}>
+                    <Pressable onPress={() => console.log('hello world')}>
+                        <Text style={style.add_title}>+</Text>
+                    </Pressable>
+                </ImageBackground>
+            </View>
+
             <Navbar />
         </View>
 

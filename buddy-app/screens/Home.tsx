@@ -4,6 +4,7 @@ import { Navbar } from './NavBar';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import { getUrl, getId, setBuddyId } from './storage/DataStorage';
+import { AddScreen } from './AddBuddyScreen';
 
 const style = StyleSheet.create({
     container: {
@@ -45,12 +46,23 @@ export const Homescreen = () => {
     const buddy = (index: number) => {
         nav.navigate('BuddyScreen')
         setBuddyId(plantid[index])
+        setFetch(true)
+
+    }
+    console.log(fetch)
+    const add = () => {
+        nav.navigate('AddScreen')
+        setFetch(true)
     }
     const fetchData = () => {
         axios.get(getUrl() + '/buddies/' + getId() + '/getBuddies')
             .then((reponse) => {
+
                 setPlantType(reponse.data.map((buddy: { plant_type: string; }) => buddy.plant_type));
                 setPlantId(reponse.data.map((buddy: { id: any }) => buddy.id))
+            })
+            .catch((error) => {
+                console.error('Error:', error)
             })
     }
     if (fetch == true) {
@@ -72,15 +84,13 @@ export const Homescreen = () => {
             </View>
             <View style={style.buddy_box}>
                 <ImageBackground source={require('buddy-app/textures/Rectangle8.png')}>
-                    <Pressable onPress={() => console.log('hello world')}>
+                    <Pressable onPress={() => add()}>
                         <Text style={style.add_title}>+</Text>
                     </Pressable>
                 </ImageBackground>
             </View>
-
             <Navbar />
         </View>
-
 
     );
 };

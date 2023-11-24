@@ -45,6 +45,7 @@ export const Buddyscreen = () => {
 
       })
   }
+
   if (fetch == true) {
     getType();
     setActiveChart('')
@@ -128,7 +129,6 @@ export const Buddyscreen = () => {
             bezier
           />
         )}
-
       </View>
 
       <View style={style.button_group}>
@@ -208,8 +208,7 @@ const style = StyleSheet.create({
     backgroundColor: 'rgb(0,79,142)',
     borderTopRightRadius: 16,
     borderTopLeftRadius: 16,
-    borderWidth: 1,
-    borderColor: 'black',
+
     width: Dimensions.get("window").width - 15,
   },
   button: {

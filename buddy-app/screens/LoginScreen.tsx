@@ -29,7 +29,11 @@ export const Login = () => {
                 response.data.forEach((user: {id: any; name: string; email: string; password: string; salt: string}) => {
                     if(Email == user.email) {
                         setIsRegistered(true);
-                        if(Password == user.password) {
+
+                        const trash = user.password + user.salt
+                        var hashes: Uint8Array = sha256(trash);
+
+
                         storeUser(user.id, [user.name,user.email, user.password]);
                         setIsValidPassword(true);
                         console.log('Win');
@@ -50,6 +54,20 @@ export const Login = () => {
             })
     }
     
+    async function sha256(message: string): Promise<string> {
+        // Encode the string as bytes
+        const encoder = new TextEncoder();
+        const data = encoder.encode(message);
+      
+        // Hash the bytes using SHA-256
+        const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+      
+        // Convert the hash to a hexadecimal string
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        const hashHex = hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
+      
+        return hashHex;
+    }
 
     return (
         <View style={styles.container}>

@@ -107,7 +107,7 @@ public class User {
     }
 
     public void setPassword(String password) {
-        setSalt();// renewing salt is good practice
+        setSalt(); // renewing salt is good practice
         this.password = hashedString(password, this.salt);
     }
 

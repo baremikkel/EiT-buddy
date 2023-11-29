@@ -51,6 +51,10 @@ public class UserController {
     public void deleteUser(@PathVariable("id") Long id){
         userServices.removeUser(id);
     }
+    @GetMapping("/{id}/verify")
+    public boolean verifyUser(@PathVariable("id") Long id, @RequestParam("verify") String inputPass) {
+        return userServices.verifyUser(id, inputPass);
+    }
 
 
 }

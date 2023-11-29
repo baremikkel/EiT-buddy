@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
-import {SafeAreaView,TextInput, Text, View, StyleSheet, Image, Button, Pressable, ImageBackground} from 'react-native'
+import { SafeAreaView, TextInput, Text, View, StyleSheet, Image, Button, Pressable, ImageBackground } from 'react-native'
 import { Navbar } from './NavBar';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import { getUrl } from './storage/DataStorage';
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     },
     details: {
         fontSize: 20,
-        paddingtop: 10,
+        paddingTop: 10,
     },
     edit: {
         marginLeft: 20,
@@ -46,22 +46,22 @@ export const Profile = () => {
 
 
     axios.get(getUrl() + '/users/' + getId())
-        .then((response) =>{
+        .then((response) => {
             setName(response.data.name)
             setEmail(response.data.email)
             setPassword(response.data.password)
-    });
+        });
 
 
-    return(
-         <View style={styles.container}>
-            <FontAwesomeIcon name="user" size={75} color="green" style={styles.profile}/>
+    return (
+        <View style={styles.container}>
+            <FontAwesomeIcon name="user" size={75} color="green" style={styles.profile} />
             <Text style={styles.name}>Welcome {userName}</Text>
             <View style={styles.info}>
                 <Text style={styles.details}>Email: {userMail}</Text>
-                <FontAwesomeIcon name="pencil" size={20} color="green" style={styles.edit}/>
+                <FontAwesomeIcon name="pencil" size={20} color="green" style={styles.edit} />
             </View>
-            <Navbar/>
+            <Navbar />
         </View>
     );
 };

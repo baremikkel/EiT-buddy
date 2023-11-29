@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { TextInput, Text, View, StyleSheet, Image, Button, Pressable, ImageBackground } from 'react-native'
+import React, { useEffect, useState } from 'react';
+import { TextInput, Text, View, StyleSheet, Image, Button, Pressable, ImageBackground, RefreshControl, ScrollView } from 'react-native'
 import { Navbar } from './NavBar';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
@@ -12,7 +12,7 @@ const style = StyleSheet.create({
         flex: 1,
     },
     buddy_box: {
-        margin: '6%',
+        margin: 20,
         width: 150,
         height: 150,
         backgroundColor: "#005691",
@@ -21,9 +21,12 @@ const style = StyleSheet.create({
 
     bbcontainer: {
         flexDirection: 'row',
+        justifyContent: 'space-between',
+        flexWrap: 'wrap'
     },
     title: {
-        paddingVertical: 60,
+        paddingTop: 60,
+        paddingBottom: 60,
         fontSize: 20,
         textAlign: 'center',
         color: 'white',
@@ -40,58 +43,64 @@ const style = StyleSheet.create({
 export const Homescreen = () => {
     const nav = useNavigation();
 
-    const [fetch, setFetch] = useState<boolean>(true);
+    const [refreshing, setRefreshing] = useState<boolean>(false);
     const [plant, setPlantType] = useState([])
     const [plantid, setPlantId] = useState([]);
+
+
     const buddy = (index: number) => {
         nav.navigate('BuddyScreen')
         setBuddyId(plantid[index])
-        setFetch(true)
 
     }
-    console.log(fetch)
     const add = () => {
         nav.navigate('AddScreen')
-        setFetch(true)
     }
-    const fetchData = () => {
-        axios.get(getUrl() + '/buddies/' + getId() + '/getBuddies')
-            .then((reponse) => {
 
-                setPlantType(reponse.data.map((buddy: { plant_type: string; }) => buddy.plant_type));
-                setPlantId(reponse.data.map((buddy: { id: any }) => buddy.id))
-            })
-            .catch((error) => {
-                console.error('Error:', error)
-            })
-    }
-    if (fetch == true) {
+    const fetchData = async () => {
+        try {
+            const response = await axios.get(getUrl() + '/buddies/' + getId() + '/getBuddies');
+            setPlantType(response.data.map((buddy: { plant_type: string }) => buddy.plant_type));
+            setPlantId(response.data.map((buddy: { id: any }) => buddy.id));
+        } catch (error) {
+            console.error('Error:', error);
+        } finally {
+            setRefreshing(false);
+        }
+    };
+
+    const onRefresh = () => {
+        setRefreshing(true)
         fetchData();
-        setFetch(false);
     }
+    useEffect(() => {
+        console.log('yellow')
+        fetchData();
+    }, [])
     return (
         <View style={style.container}>
-            <View style={style.bbcontainer}>
-                {plant.map((plant, index) => (
-                    <View style={style.buddy_box}>
-                        <ImageBackground source={require('buddy-app/textures/Rectangle8.png')}>
-                            <Pressable onPress={() => buddy(index)}>
-                                <Text key={index} style={style.title}>{plant}</Text>
-                            </Pressable>
-                        </ImageBackground>
-                    </View>
-                ))}
-            </View>
-            <View style={style.buddy_box}>
-                <ImageBackground source={require('buddy-app/textures/Rectangle8.png')}>
-                    <Pressable onPress={() => add()}>
-                        <Text style={style.add_title}>+</Text>
-                    </Pressable>
-                </ImageBackground>
-            </View>
+            <ScrollView
+                refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
+                <View style={style.bbcontainer}>
+                    {plant.map((plant, index) => (
+                        <View key={index} style={style.buddy_box}>
+                            <ImageBackground source={require('buddy-app/textures/Rectangle8.png')}>
+                                <Pressable onPress={() => buddy(index)}>
+                                    <Text style={style.title}>{plant}</Text>
+                                </Pressable>
+                            </ImageBackground>
+                        </View>
+                    ))}
+                </View>
+                <View style={style.buddy_box}>
+                    <ImageBackground source={require('buddy-app/textures/Rectangle8.png')}>
+                        <Pressable onPress={() => add()}>
+                            <Text style={style.add_title}>+</Text>
+                        </Pressable>
+                    </ImageBackground>
+                </View>
+            </ScrollView>
             <Navbar />
         </View>
-
     );
 };
-

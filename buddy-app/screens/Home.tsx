@@ -18,6 +18,14 @@ const style = StyleSheet.create({
         backgroundColor: "#005691",
         borderRadius: 10,
     },
+    addbuddy_box: {
+        margin: 20,
+        width: 150,
+        height: 150,
+        backgroundColor: "#005691",
+        borderRadius: 100,
+        overflow: 'hidden'
+    },
 
     bbcontainer: {
         flexDirection: 'row',
@@ -74,7 +82,6 @@ export const Homescreen = () => {
         fetchData();
     }
     useEffect(() => {
-        console.log('yellow')
         fetchData();
     }, [])
     return (
@@ -92,7 +99,7 @@ export const Homescreen = () => {
                         </View>
                     ))}
                 </View>
-                <View style={style.buddy_box}>
+                <View style={style.addbuddy_box}>
                     <ImageBackground source={require('buddy-app/textures/Rectangle8.png')}>
                         <Pressable onPress={() => add()}>
                             <Text style={style.add_title}>+</Text>

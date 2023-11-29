@@ -93,8 +93,7 @@ export const Buddyscreen = () => {
             width={Dimensions.get("window").width - 15} // from react-native
             height={230}
             fromZero={true}
-            yAxisLabel="$"
-            yAxisSuffix="k"
+            yAxisSuffix="💧"
             yAxisInterval={1} // optional, defaults to 1
             chartConfig={{
               backgroundGradientFrom: "#005ECF",
@@ -117,7 +116,7 @@ export const Buddyscreen = () => {
             width={Dimensions.get("window").width - 15} // from react-native
             height={230}
             fromZero={true}
-            yAxisSuffix="k"
+            yAxisSuffix="☀"
             yAxisInterval={1} // optional, defaults to 1
             chartConfig={{
               backgroundGradientFrom: "#005ECF",

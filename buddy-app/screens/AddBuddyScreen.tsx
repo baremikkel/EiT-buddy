@@ -10,28 +10,27 @@ export const AddScreen = () => {
     const [fetch, setFetch] = useState<boolean>(true);
     const [buddies, setBuddies] = useState([])
     const [newType, setNewType] = useState([])
+
     const fetchUnclaimedBuddies = () => {
         axios.get(getUrl() + '/buddies/unClaimed')
             .then((response) => {
                 setBuddies(response.data.map((buddy: { id: any; plant_type: string }) => buddy))
             })
     }
-    const claimBuddy = (type: string, id: any) => {
-        if (type != 'Unclaimed') {
-            Promise.all([
-                axios.put(getUrl() + '/buddies/' + id + '/type?type=' + newType),
-                axios.put(getUrl() + '/buddies/' + getId() + '/addbuddy/' + id),
-            ])
-                .then(() => {
-                    console.log(type)
-                    type = "Unclaimed"
-                    setFetch(true)
-                })
-                .catch((error) => {
-                    console.error('Error:', error)
-                })
+    const claimBuddy = async (type: string, id: any) => {
+        if (type !== 'Unclaimed') {
+            try {
+                await axios.put(getUrl() + '/buddies/' + id + '/type?type=' + type.substring(0));
+                await axios.put(getUrl() + '/buddies/' + getId() + '/addbuddy/' + id);
+
+                type = "Unclaimed";
+                setFetch(true);
+            } catch (error) {
+                console.error('Error during claimBuddy:', error);
+            }
         }
-    }
+    };
+
 
     if (fetch == true) {
         fetchUnclaimedBuddies()

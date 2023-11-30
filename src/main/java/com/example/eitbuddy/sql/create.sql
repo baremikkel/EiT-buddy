@@ -8,7 +8,8 @@ CREATE TABLE Users(
                       ID SERIAL PRIMARY KEY,
                       name VARCHAR(100) NOT NULL,
                       email TEXT NOT NULL UNIQUE,
-                      password TEXT NOT NULL
+                      password TEXT NOT NULL,
+                      salt varchar(255) NOT NULL
 );
 CREATE TABLE Buddies(
                         ID SERIAL PRIMARY KEY,
@@ -17,7 +18,7 @@ CREATE TABLE Buddies(
 );
 CREATE TABLE SensorValues(
                              ID SERIAL PRIMARY KEY,
-                             BuddyID INT REFERENCES Buddies(ID),
+                             Buddy_id INT REFERENCES Buddies(ID),
                              temperature DECIMAL NOT NULL,
                              light DECIMAL NOT NULL,
                              soil DECIMAL NOT NULL,

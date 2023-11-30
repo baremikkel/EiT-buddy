@@ -55,11 +55,11 @@ export const Profile = () => {
 
     return (
         <View style={styles.container}>
-            <FontAwesomeIcon name="user" size={75} color="green" style={styles.profile} />
+            <FontAwesomeIcon name="user" size={75} color="#005691" style={styles.profile} />
             <Text style={styles.name}>Welcome {userName}</Text>
             <View style={styles.info}>
                 <Text style={styles.details}>Email: {userMail}</Text>
-                <FontAwesomeIcon name="pencil" size={20} color="green" style={styles.edit} />
+                <FontAwesomeIcon name="pencil" size={20} color="#005691" style={styles.edit} />
             </View>
             <Navbar />
         </View>

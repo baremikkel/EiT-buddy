@@ -56,7 +56,24 @@ public class UserServices {
         } else
             throw new EntityNotFoundException("User with ID" + id + " not found");
     }
+    public User updateUserSalt(Long id, String salt) {
+        Optional<User> UserOptional = userRepo.findById(id);
+        if(UserOptional.isPresent()){
+            User user = UserOptional.get();
+            user.setSalt();
+            return userRepo.save(user);
+        } else
+            throw new EntityNotFoundException("User with ID" + id + " not found");
+    }
     public void removeUser(Long id) {
         userRepo.deleteById(id);
+    }
+    public boolean verifyUser(Long id, String inputPass) {
+        Optional<User> UserOptional = userRepo.findById(id);
+        if(UserOptional.isPresent()){
+            User user = UserOptional.get();
+            return user.validatePassword(inputPass);
+        } else
+            throw new EntityNotFoundException("User with ID" + id + " not found");
     }
 }

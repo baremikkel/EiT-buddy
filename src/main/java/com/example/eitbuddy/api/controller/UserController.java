@@ -43,9 +43,17 @@ public class UserController {
     public User updateUserPassword(@PathVariable("id") Long id, @RequestParam("password") String password){
         return userServices.updateUserPassword(id, password);
     }
+    @PutMapping("/{id}/salt")
+    public User updateUserSalt(@PathVariable("id") Long id, @RequestParam("salt") String salt){
+        return userServices.updateUserSalt(id, salt);
+    }
     @DeleteMapping("/{id}")
     public void deleteUser(@PathVariable("id") Long id){
         userServices.removeUser(id);
+    }
+    @GetMapping("/{id}/verify")
+    public boolean verifyUser(@PathVariable("id") Long id, @RequestParam("verify") String inputPass) {
+        return userServices.verifyUser(id, inputPass);
     }
 
 

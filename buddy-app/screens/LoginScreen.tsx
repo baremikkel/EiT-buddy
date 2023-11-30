@@ -25,28 +25,29 @@ export const Login = () => {
     ) => {
         axios.get(getUrl() + '/users')
             .then((response) => {
-                setData(response.data)
-                response.data.forEach((user: { id: any; name: string; email: string; password: string; }) => {
-                    if (Email == user.email && Password == user.password) {
-                        storeUser(user.id, [user.name, user.email, user.password]);
+                response.data.forEach((user: {id: number; email: string}) => {
+                    if(Email.toLowerCase() == user.email.toLowerCase()) {
                         setIsRegistered(true);
-                        setIsValidPassword(true);
-                        login();
-                    }
-                    if (Email == user.email && Password != user.password) {
-                        setIsRegistered(true);
-                        setIsValidPassword(false);
-                    }
-                    if (Email != user.email) {
+                        axios.get(getUrl()+'/users/'+ user.id +'/verify?verify='+ Password)
+                        .then((response) => {
+                            const validUser = response.data
+                            if(validUser) {
+                                setIsValidPassword(true);
+                                login();
+                            } else {
+                            setIsValidPassword(false);
+                            }
+                        })
+                    } else {
                         setIsRegistered(false);
                     }
                 })
+                
             })
             .catch((error) => {
                 console.log(error)
             })
     }
-
 
     return (
         <View style={styles.container}>

@@ -65,7 +65,7 @@ public class User {
         }
     }
 
-    public boolean validate(String password) {        
+    public boolean validatePassword(String password) {        
         return this.password.equals(hashedString(password, this.salt));
     }
 

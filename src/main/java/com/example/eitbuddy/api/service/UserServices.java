@@ -68,4 +68,12 @@ public class UserServices {
     public void removeUser(Long id) {
         userRepo.deleteById(id);
     }
+    public boolean verifyUser(Long id, String inputPass) {
+        Optional<User> UserOptional = userRepo.findById(id);
+        if(UserOptional.isPresent()){
+            User user = UserOptional.get();
+            return user.validatePassword(inputPass);
+        } else
+            throw new EntityNotFoundException("User with ID" + id + " not found");
+    }
 }

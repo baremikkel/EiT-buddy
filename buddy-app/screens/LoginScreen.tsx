@@ -54,8 +54,7 @@ export const Login = () => {
         <View style={styles.container}>
 
             <View style={styles.image_container}>
-                <Image
-                    source={require('buddy-app/textures/logo.png')} style={styles.image} />
+                <Image source={require('buddy-app/textures/logo.png')} style={styles.image} />
             </View>
             <Text style={[styles.textMod]}>Email</Text>
             <TextInput

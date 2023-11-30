@@ -46,5 +46,5 @@ export const setBuddyId = (newbuddyid: any) => {
   buddyid = newbuddyid;
 }
 export const getUrl = () => {
-  return 'http://192.168.0.167:8080';
+  return 'http://10.126.20.130:8080';
 }

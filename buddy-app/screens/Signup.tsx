@@ -41,8 +41,10 @@ export const Signup: React.FC<NavProp> = ({navigation}) => {
 
     return(
         <View style={styles.container}>
-            <ImageBackground source={require('buddy-app/textures/plantBackground.jpg')} resizeMode='cover' style={styles.image}>
-            <Text style={[styles.text, styles.textMod]}>Username</Text>
+            <View style={styles.image_container}>
+                <Image source={require('buddy-app/textures/logo.png')} style={styles.image} />
+            </View>
+            <Text style={[styles.textMod]}>Username</Text>
             <TextInput
                 autoCapitalize='none'
                 value={name}
@@ -51,7 +53,7 @@ export const Signup: React.FC<NavProp> = ({navigation}) => {
                 placeholder='Username'
                 placeholderTextColor="lightgray"
             ></TextInput>
-           <Text style={[styles.text, styles.textMod]}>Email</Text>
+           <Text style={[styles.textMod]}>Email</Text>
             <TextInput
                 autoCapitalize='none'       
                 value={email}
@@ -60,7 +62,7 @@ export const Signup: React.FC<NavProp> = ({navigation}) => {
                 placeholder='Email address'
                 placeholderTextColor="lightgray"
             ></TextInput>
-            <Text style={[styles.text, styles.textMod]}>Password</Text>
+            <Text style={[styles.textMod]}>Password</Text>
             <TextInput
                 autoCapitalize='none'
                 value={password}
@@ -70,7 +72,7 @@ export const Signup: React.FC<NavProp> = ({navigation}) => {
                 placeholder='Password'
                 placeholderTextColor="lightgray"
             ></TextInput>
-            <Text style={[styles.text, styles.textMod]}>Confirm Password</Text>
+            <Text style={[styles.textMod]}>Confirm Password</Text>
             <TextInput
                 autoCapitalize='none'
                 value={cPassword}
@@ -89,7 +91,6 @@ export const Signup: React.FC<NavProp> = ({navigation}) => {
                 <Text style={styles.text}>Signup</Text>
             </Pressable>
             
-            </ImageBackground>
         </View>
     );
 };
@@ -98,23 +99,25 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center'
-      },
-    input:{
+    },
+    input: {
         marginHorizontal: 15,
         borderRadius: 20,
         borderWidth: 1,
         height: 40,
         paddingLeft: 20,
-        backgroundColor: 'rgba(0,0,0,0.4)',
-        color: 'white' 
+        backgroundColor: '#005691',
+        color: 'white'
     },
     textMod:{
         paddingVertical: 15,
         paddingLeft: 20,
     },
     image: {
-        flex: 1,
-        justifyContent: 'center'
+        zIndex: 2,
+        width: 300,
+        height: 100,
+        alignSelf: 'center',
     },
     button: {
         borderRadius: 20,
@@ -124,7 +127,7 @@ const styles = StyleSheet.create({
         marginVertical: 15,
         marginHorizontal: 50,
         alignItems: 'center',
-        backgroundColor: 'rgba(0,15,0,0.3)',
+        backgroundColor: '#005691',
     },
     text:{
         color: 'white'
@@ -140,4 +143,7 @@ const styles = StyleSheet.create({
             fontWeight: 'bold',
             alignSelf: 'center',
     },
+    image_container: {
+        marginBottom: 80,
+    }
 });

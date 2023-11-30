@@ -3,8 +3,8 @@ import axios from 'axios';
 import { SafeAreaView, TextInput, Text, View, StyleSheet, Image, Button, Pressable, ImageBackground } from 'react-native'
 import { Navbar } from './NavBar';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
-import { getUrl } from './storage/DataStorage';
-import { getId } from './storage/DataStorage';
+import { getId, getMail, getName, getUrl } from './storage/DataStorage';
+import { useNavigation } from "@react-navigation/native";
 
 const styles = StyleSheet.create({
     container: {
@@ -38,28 +38,20 @@ const styles = StyleSheet.create({
 });
 
 export const Profile = () => {
-
-
-    const [userName, setName] = useState("");
-    const [userMail, setEmail] = useState("");
-    const [userPassword, setPassword] = useState("");
-
-
-    axios.get(getUrl() + '/users/' + getId())
-        .then((response) => {
-            setName(response.data.name)
-            setEmail(response.data.email)
-            setPassword(response.data.password)
-        });
-
+    const navigation = useNavigation();
+    const changeMail = () => {
+        navigation.navigate('ChangeMail')
+    }
 
     return (
         <View style={styles.container}>
             <FontAwesomeIcon name="user" size={75} color="#005691" style={styles.profile} />
-            <Text style={styles.name}>Welcome {userName}</Text>
+            <Text style={styles.name}>Welcome {getName()}</Text>
             <View style={styles.info}>
-                <Text style={styles.details}>Email: {userMail}</Text>
-                <FontAwesomeIcon name="pencil" size={20} color="#005691" style={styles.edit} />
+                <Text style={styles.details}>Email: {getMail()}</Text>
+                <Pressable style={styles.edit} onPress={changeMail}>
+                    <FontAwesomeIcon name="pencil" size={20} color="#005691" />
+                </Pressable>
             </View>
             <Navbar />
         </View>

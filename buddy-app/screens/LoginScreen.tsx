@@ -33,7 +33,7 @@ export const Login = () => {
                                 const validUser = response.data
                                 if (validUser) {
                                     setIsValidPassword(true);
-                                    storeUser(user.id, [user.email, user.name]);
+                                    storeUser(user.id, user.name, user.email);
                                     login();
                                 } else {
                                     setIsValidPassword(false);
@@ -88,7 +88,7 @@ export const Login = () => {
             <Pressable style={styles.button} onPress={() => verify(email, password)}>
                 <Text style={styles.text}>Login</Text>
             </Pressable>
-            <Pressable onPress={signup} style={styles.signup}>
+            <Pressable style={styles.signup} onPress={signup}>
                 <Text>or sign up here</Text>
             </Pressable>
         </View>

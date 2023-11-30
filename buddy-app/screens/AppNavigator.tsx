@@ -7,6 +7,7 @@ import { Signup } from './Signup';
 import { Profile } from './ProfileScreen'
 import { Buddyscreen } from './Buddyscreen';
 import { AddScreen } from './AddBuddyScreen';
+import { ChangeMail } from './ChangeMail';
 
 const Stack = createStackNavigator();
 
@@ -20,6 +21,7 @@ const AppNavigator = () => {
         <Stack.Screen name="Homescreen" component={Homescreen} />
         <Stack.Screen name='BuddyScreen' component={Buddyscreen} />
         <Stack.Screen name='AddScreen' component={AddScreen} />
+        <Stack.Screen name='ChangeMail' component={ChangeMail} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -4,7 +4,6 @@ import { Navbar } from './NavBar';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import { getUrl, getId, setBuddyId } from './storage/DataStorage';
-import { AddScreen } from './AddBuddyScreen';
 
 const style = StyleSheet.create({
     container: {
@@ -12,14 +11,14 @@ const style = StyleSheet.create({
         flex: 1,
     },
     buddy_box: {
-        margin: 20,
+        margin: 15,
         width: 150,
         height: 150,
         backgroundColor: "#005691",
         borderRadius: 10,
     },
     addbuddy_box: {
-        margin: 20,
+        margin: 15,
         width: 150,
         height: 150,
         backgroundColor: "#005691",

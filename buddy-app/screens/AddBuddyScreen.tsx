@@ -7,6 +7,7 @@ import axios from 'axios';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome'
 
 export const AddScreen = () => {
+    const nav = useNavigation()
     const [fetch, setFetch] = useState<boolean>(true);
     const [buddies, setBuddies] = useState([])
     const [newType, setNewType] = useState([])
@@ -17,6 +18,9 @@ export const AddScreen = () => {
                 setBuddies(response.data.map((buddy: { id: any; plant_type: string }) => buddy))
             })
     }
+    const returnToHome = () => {
+        nav.navigate('Homescreen')
+    }
     const claimBuddy = async (type: string, id: any) => {
         if (type !== 'Unclaimed') {
             try {
@@ -25,6 +29,7 @@ export const AddScreen = () => {
 
                 type = "Unclaimed";
                 setFetch(true);
+                returnToHome();
             } catch (error) {
                 console.error('Error during claimBuddy:', error);
             }

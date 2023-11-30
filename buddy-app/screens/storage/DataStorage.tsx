@@ -5,7 +5,7 @@ let id: any;
 let buddyid: any;
 
 // To store an array
-export const storeUser = async (key: string, array: any[]) => {
+export const storeUser = async (key: number, array: any[]) => {
   try {
     id = key
     // Convert the array to a string manually
@@ -13,7 +13,7 @@ export const storeUser = async (key: string, array: any[]) => {
 
     // Convert the key to a string
     const stringKey = String(key);
-    
+
     // Store the stringified array in AsyncStorage with the string key
     await AsyncStorage.setItem(stringKey, stringifiedArray);
   } catch (error) {
@@ -37,14 +37,14 @@ const getUserinfo = async (key: string): Promise<any[] | null> => {
 };
 
 export const getId = () => {
-    return id;
+  return id;
 }
 export const getBuddyId = () => {
-    return buddyid;
+  return buddyid;
 }
 export const setBuddyId = (newbuddyid: any) => {
   buddyid = newbuddyid;
 }
 export const getUrl = () => {
-    return 'http://192.168.0.167:8080';
+  return 'http://192.168.0.167:8080';
 }

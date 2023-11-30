@@ -156,7 +156,7 @@ export const Buddyscreen = () => {
         </View>
         <View style={style.text_pair}>
           <Text style={style.text_l}>Temperature: </Text>
-          <Text style={style.text_r}>{temp}</Text>
+          <Text style={style.text_r}>{temp}°C</Text>
         </View>
         <View style={style.text_pair}>
           <Text style={style.text_l}>Light: </Text>
